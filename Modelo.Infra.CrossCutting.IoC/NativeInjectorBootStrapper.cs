@@ -52,8 +52,8 @@ namespace Modelo.Infra.CrossCutting.IoC
         public static void MigrateDB(IApplicationBuilder app)
         {
             //Migration - Data            
-           // var context = new ModeloContext();
-           // context.Database.EnsureCreated();
+            var context = new ModeloContext();
+            context.Database.EnsureCreated();
             //if (!context.Database.EnsureCreated())
                 //context.Database.Migrate();
         }

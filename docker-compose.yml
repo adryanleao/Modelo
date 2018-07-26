@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY}modelowebapi
     build:
       context: .
-      dockerfile: Modelo.WebApi/
+      dockerfile: Modelo.WebApi/Dockerfile
