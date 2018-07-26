@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   modelo.webapi:
-    image: ${DOCKER_REGISTRY}modelowebapi
+    image: /modelowebapi
     build:
       context: .
-      dockerfile: Modelo.WebApi/Dockerfile
+      dockerfile: Modelo.WebApi/
