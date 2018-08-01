@@ -6,3 +6,5 @@ services:
     build:
       context: .
       dockerfile: Modelo.WebApi/Dockerfile
+  db:
+    image: mongo:4.0
