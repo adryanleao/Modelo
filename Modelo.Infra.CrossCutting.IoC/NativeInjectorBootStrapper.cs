@@ -13,12 +13,15 @@ using Modelo.Infra.Data.Context;
 //using Modelo.Infra.Data.Oracle.Repository;
 //using Modelo.Infra.Data.Oracle.UoW;
 //using Modelo.Infra.Data.Oracle.Context;
+//using Modelo.Infra.Data.Oracle.Repository.ReadOnly;
 using Modelo.Domain.Core.Notifications;
 using Modelo.Domain.Events.Funcionario;
 using Modelo.Domain.EventHandlers.Funcioanario;
 using Modelo.Domain.CommandHandlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Modelo.Domain.Interfaces.ReadOnly;
+using Modelo.Infra.Data.Repository.ReadOnly;
 
 namespace Modelo.Infra.CrossCutting.IoC
 {
@@ -48,6 +51,7 @@ namespace Modelo.Infra.CrossCutting.IoC
 
             // Infra - Data
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
+            services.AddScoped<IFuncionarioReadOnlyRepository, FuncionarioReadOnlyRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ModeloContext>();
         }

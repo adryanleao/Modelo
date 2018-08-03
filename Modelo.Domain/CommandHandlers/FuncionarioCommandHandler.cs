@@ -8,6 +8,7 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Modelo.Domain.Interfaces.ReadOnly;
 
 namespace Modelo.Domain.CommandHandlers
 {
@@ -16,14 +17,17 @@ namespace Modelo.Domain.CommandHandlers
         IRequestHandler<UpdateFuncionarioCommand>,
         IRequestHandler<RemoveFuncionarioCommand>
     {
+        private readonly IFuncionarioReadOnlyRepository _funcionarioReadOnlyRepository;
         private readonly IFuncionarioRepository _funcionarioRepository;
         private readonly IMediatorHandler Bus;
 
-        public FuncionarioCommandHandler(IFuncionarioRepository funcionarioRepository,
+        public FuncionarioCommandHandler(IFuncionarioReadOnlyRepository funcionarioReadOnlyRepository,
+                                      IFuncionarioRepository funcionarioRepository,
                                       IUnitOfWork uow,
                                       IMediatorHandler bus,
                                       INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
         {
+            _funcionarioReadOnlyRepository = funcionarioReadOnlyRepository;
             _funcionarioRepository = funcionarioRepository;
             Bus = bus;
         }
@@ -38,7 +42,7 @@ namespace Modelo.Domain.CommandHandlers
 
             var funcionario = new Funcionario(Guid.NewGuid(), message.Nome, message.Email, message.DataAniversario);
 
-            if (_funcionarioRepository.GetByEmail(funcionario.Email) != null)
+            if (_funcionarioReadOnlyRepository.GetByEmail(funcionario.Email) != null)
             {
                 Bus.RaiseEvent(new DomainNotification(message.MessageType, "Ja existe um funcionario com esse e-mail."));
                 return Task.CompletedTask;
@@ -63,7 +67,7 @@ namespace Modelo.Domain.CommandHandlers
             }
 
             var funcionario = new Funcionario(message.Id, message.Nome, message.Email, message.DataAniversario);
-            var existingFuncionario = _funcionarioRepository.GetByEmail(funcionario.Email);
+            var existingFuncionario = _funcionarioReadOnlyRepository.GetByEmail(funcionario.Email);
 
             if (existingFuncionario != null && existingFuncionario.Id != funcionario.Id)
             {

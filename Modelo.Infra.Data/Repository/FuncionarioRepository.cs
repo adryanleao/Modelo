@@ -13,10 +13,5 @@ namespace Modelo.Infra.Data.Repository
         {
 
         }
-
-        public Funcionario GetByEmail(string email)
-        {
-            return DbSet.AsNoTracking().FirstOrDefault(c => c.Email == email);
-        }
     }
 }

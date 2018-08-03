@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Modelo.Application.Interfaces;
 using Modelo.Application.ViewModels;
 using Modelo.Domain.Commands.Funcionario;
 using Modelo.Domain.Core.Bus;
-using Modelo.Domain.Interfaces;
+using Modelo.Domain.Interfaces.ReadOnly;
 
 namespace Modelo.Application.Services
 {
     public class FuncionarioAppService : IFuncionarioAppService
     {
         private readonly IMapper _mapper;
-        private readonly IFuncionarioRepository _funcionarioRepository;
+        private readonly IFuncionarioReadOnlyRepository _funcionarioReadOnlyRepository;
         private readonly IMediatorHandler Bus;
 
         public FuncionarioAppService(IMapper mapper,
-                                  IFuncionarioRepository funcionarioRepository,
+                                  IFuncionarioReadOnlyRepository funcionarioReadOnlyRepository,
                                   IMediatorHandler bus)
         {
             _mapper = mapper;
-            _funcionarioRepository = funcionarioRepository;
+            _funcionarioReadOnlyRepository = funcionarioReadOnlyRepository;
             Bus = bus;
         }
 
@@ -30,14 +31,20 @@ namespace Modelo.Application.Services
             GC.SuppressFinalize(this);
         }
 
+        public IEnumerable<FuncionarioViewModel> Find(Expression<Func<FuncionarioViewModel, bool>> predicate)
+        {
+            //return _funcionarioReadOnlyRepository.Find().ProjectTo<FuncionarioViewModel>();
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<FuncionarioViewModel> GetAll()
         {
-            return _funcionarioRepository.GetAll().ProjectTo<FuncionarioViewModel>();
+            return _funcionarioReadOnlyRepository.GetAll().ProjectTo<FuncionarioViewModel>();
         }
 
         public FuncionarioViewModel GetById(Guid id)
         {
-            return _mapper.Map<FuncionarioViewModel>(_funcionarioRepository.GetById(id));
+            return _mapper.Map<FuncionarioViewModel>(_funcionarioReadOnlyRepository.GetById(id));
         }
 
         public void Register(FuncionarioViewModel funcionarioViewModel)
