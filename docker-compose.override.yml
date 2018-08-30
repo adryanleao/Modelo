@@ -4,5 +4,6 @@ services:
   modelo.webapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Teste=Adryan
     ports:
       - "80"

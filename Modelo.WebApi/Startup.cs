@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Modelo.Infra.CrossCutting.IoC;
 using Modelo.WebApi.Configurations;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 
 namespace Modelo.WebApi
 {
@@ -58,7 +59,6 @@ namespace Modelo.WebApi
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IHttpContextAccessor accessor)
         {
             loggerFactory.AddConsole();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

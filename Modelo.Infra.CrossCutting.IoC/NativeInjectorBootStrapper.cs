@@ -7,21 +7,21 @@ using Modelo.Domain.Commands.Funcionario;
 using Modelo.Domain.Core.Bus;
 using Modelo.Domain.Interfaces;
 using Modelo.Infra.CrossCutting.Bus;
-using Modelo.Infra.Data.Repository;
-using Modelo.Infra.Data.UoW;
-using Modelo.Infra.Data.Context;
-//using Modelo.Infra.Data.Oracle.Repository;
-//using Modelo.Infra.Data.Oracle.UoW;
-//using Modelo.Infra.Data.Oracle.Context;
-//using Modelo.Infra.Data.Oracle.Repository.ReadOnly;
+//using Modelo.Infra.Data.Repository;
+//using Modelo.Infra.Data.Repository.ReadOnly;
+//using Modelo.Infra.Data.Context;
+//using Modelo.Infra.Data.UoW;
+using Modelo.Infra.Data.Oracle.Repository;
+using Modelo.Infra.Data.Oracle.UoW;
+using Modelo.Infra.Data.Oracle.Context;
+using Modelo.Infra.Data.Oracle.Repository.ReadOnly;
 using Modelo.Domain.Core.Notifications;
 using Modelo.Domain.Events.Funcionario;
 using Modelo.Domain.EventHandlers.Funcioanario;
 using Modelo.Domain.CommandHandlers;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Modelo.Domain.Interfaces.ReadOnly;
-using Modelo.Infra.Data.Repository.ReadOnly;
+
 
 namespace Modelo.Infra.CrossCutting.IoC
 {
